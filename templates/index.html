@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoltVerge | Smart E-Commerce</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="glass-header">
+    <div class="header-content">
+        <h1 class="logo">Volt<span>Verge</span></h1>
+        <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Search premium products...">
+            <span class="search-icon">🔍</span>
+        </div>
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle Theme">🌙</button>
+    </div>
+</header>
+
+<main class="fade-in">
+    <div class="hero">
+        <div class="hero-content">
+            <h2>Premium tech that looks sharp</h2>
+            <p>AI sentiment reads every review so you spot the real winners fast</p>
+        </div>
+    </div>
+
+    <div class="grid" id="productGrid">
+        {% for id, product in products.items() %}
+        <div class="card" onclick="window.location.href='/product/{{id}}'">
+            <div class="card-img-wrapper">
+                <img src="/static/images/{{id}}_image.png" alt="{{product.name}}">
+            </div>
+            <div class="card-body">
+                <h3>{{product.name}}</h3>
+                <p class="description">{{product.description}}</p>
+                <span class="btn-text">View Details →</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

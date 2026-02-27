@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{product.name}} | VoltVerge </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header class="glass-header">
+    <div class="header-content">
+        <h1 class="logo" onclick="window.location.href='/'" style="cursor:pointer;">Volt<span>Verge</span></h1>
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle Theme">🌙</button>
+    </div>
+</header>
+
+<main class="product-layout fade-in">
+    <div class="product-visual-container">
+        <div class="product-visual sticky-visual">
+            <img src="/static/images/{{product_id}}_image.png" alt="{{product.name}}" class="main-product-img">
+            <div class="rating-badge">
+                <span class="star-icon">⭐</span>
+                <span id="avgRating" class="rating-number">{{ avg_rating }}</span>
+                <span class="rating-count">(<span id="totalReviews">{{ total_reviews }}</span>)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-details">
+        <h2 class="product-title">{{product.name}}</h2>
+        <p class="product-description">{{product.description}}</p>
+        
+        <div class="chart-container">
+            <h3>Sentiment Breakdown</h3>
+            <div class="canvas-wrapper">
+                <canvas id="ratingChart"></canvas>
+            </div>
+        </div>
+
+        <div class="review-section">
+            <h3>Share Your Experience</h3>
+            <div class="input-group">
+                <textarea id="reviewText" placeholder="Type your review here... Our AI will read it and rate it automatically."></textarea>
+                <button class="primary-btn" onclick="submitReview({{product_id}})">Submit AI Review</button>
+            </div>
+        </div>
+
+        <div class="customer-reviews-section">
+            <h3>Recent Reviews</h3>
+            <div id="reviewsList">
+                {% for r in product.reviews %}
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="review-stars">
+                            {% for _ in range(r.rating) %}⭐{% endfor %}
+                        </span>
+                        <span class="review-date">{{ r.date }}</span>
+                    </div>
+                    <p class="review-text">{{ r.text }}</p>
+                </div>
+                {% else %}
+                <p id="noReviewsMsg" class="empty-state">No reviews yet. Be the first to try the AI!</p>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<div id="toastContainer" class="toast-container"></div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const initialBreakdown = {{ breakdown | tojson | safe }};
+        updateChart(initialBreakdown);
+    });
+</script>
+</body>
+</html>
