@@ -58,8 +58,23 @@ VoltVerge/ (Main Project Directory)
     ├── index.html              # Homepage with product grid
     └── product.html            # Detailed product view & AI reviews
 ```
-## Screenshot
-![Screenshot](image/Screenshot.png)
+## Project Screenshots
+
+### Screenshot 1
+![Screenshot 1](image/Screenshot_1.png)
+
+### Screenshot 2
+![Screenshot 2](image/Screenshot_2.png)
+
+### Screenshot 3
+![Screenshot 3](image/Screenshot_3.png)
+
+### Screenshot 4
+![Screenshot 4](image/Screenshot_4.png)
+
+### Screenshot 5
+![Screenshot 5](image/Screenshot_5.png)
+
 
 ## 🤝 Contributing
 Contributions are welcome! To contribute, please fork the repository, make changes, and submit a pull request.
